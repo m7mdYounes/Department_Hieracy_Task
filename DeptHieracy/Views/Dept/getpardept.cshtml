@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DeptHieracy.Models.Dept>
+
+@{
+    ViewData["Title"] = "Parent Departments";
+}
+
+<h1>Parent Departments</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptNameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent_Dept_id)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeptNameName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parent_Dept_id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Index">Back to Index</a>
+</p>
+
+<<form asp-action="GetParDept" method="post">
+    <div class="form-group">
+        <label for="departmentSelect" class="control-label">Select Department</label>
+        <select id="departmentSelect" name="departmentId" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.DeptNameName</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Get Parent Departments</button>
+</form>
